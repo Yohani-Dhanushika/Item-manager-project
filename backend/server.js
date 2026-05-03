@@ -1,10 +1,16 @@
 import express from "express";
 import dotenv from "dotenv";
+import dns from "dns";
 import cors from "cors";
 import mongoose from "mongoose";
 import itemRoutes from "./routes/itemRoutes.js";
 
 dotenv.config();
+
+const dnsServers = dns.getServers();
+if (dnsServers.includes("127.0.0.1")) {
+  dns.setServers(["1.1.1.1", "8.8.8.8"]);
+}
 
 const app = express();
 
